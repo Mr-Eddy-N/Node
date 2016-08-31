@@ -1,1 +1,0 @@
-console.log('Program Euler v3');
