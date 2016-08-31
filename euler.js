@@ -1,1 +1,1 @@
-console.log('Program Euler');
+console.log('Program Euler v2');
