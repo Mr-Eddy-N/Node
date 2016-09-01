@@ -24,19 +24,25 @@ function displayPathtoPrincess(dimension, grid)
     //console.log(get_M(Matrix,'p'))
     //console.log("Matrix: "+Matrix.length)Matrix.forEach(function(a){console.log(a)})
     while(!isSolution){
-       console.log('get m')
+      count+=1;
+      console.log('get m')
       var position=get_M(Matrix,'m')
       console.log('inicia mapeo')
        for(var p=p1;p<=p2;p++){
         //console.log('expande')
         var Nodos=expande(Registro[p]);
+        console.log(Nodos.length)
+        var parent=Registro[p].ID;
          for (var n in Nodos){
-           if(n.M == solution)
+             console.log(Nodos[n]);
+           if(CompareM(get_M(n.M),solution))
            isSolution=true;
+           n.ID=count;
+           n.Parent=parent;
            Registro.push(n);
-           count+=1;
            console.log(count);
-           console.log('expandiendo')
+           console.log('expandiendo: '+p+'/'+(p2-p1))
+           printMatrix()
             console.reset();
          }
        }
@@ -82,11 +88,12 @@ function isPossibleMoveIt(M,move){
 }
 function Exist(M){
   var response=false;
-  var e=Registro.filter(function(x){return x.M==M}).length;
+  var e=Registro.filter(function(x){return CompareM(x.M,M)}).length;
   if(e>0)
   response =true;
 }
 function get_M(M,t){
+    console.log(M);
   var w = M.length;
   var p={};
   for (var r=0;r<w;r++){
@@ -124,6 +131,12 @@ function printMatrix(M){
        console.log(a);
      })
 
+}
+function CompareM(m1,m2){
+var  response =false;
+var m_1=JSON.stringify(m1);
+var m_2=JSON.stringify(m2);
+return m_1 == m_2;
 }
 console.log("bot save princess");
 grid=["-","-","-","-","m","-","p","-","-"];
