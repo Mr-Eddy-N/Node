@@ -1,6 +1,10 @@
+
+var Helper=require("./Helper.js");
+Helper.version();
 console.reset = function () {
   return process.stdout.write('\033c');
 }
+console.reset();
 function displayPathtoPrincess(dimension, grid)
 {
    // console.log("display path")
@@ -9,6 +13,7 @@ function displayPathtoPrincess(dimension, grid)
    Moves=['D','U','L','R'];
 
   Matrix=gidToMatrix(dimension,grid);
+  //console.log(Matrix);
   printMatrix(Matrix);
     isSolution=false;
     var ini= new Nodo();
@@ -20,88 +25,43 @@ function displayPathtoPrincess(dimension, grid)
     var count=0;
     var p1=0;
     var p2=1;
-    var solution=get_M(Matrix,'p')
+    var solution=Helper.get_M(Matrix,'p')
     //console.log(get_M(Matrix,'p'))
     //console.log("Matrix: "+Matrix.length)Matrix.forEach(function(a){console.log(a)})
     while(!isSolution){
-      count+=1;
-      console.log('get m')
-      var position=get_M(Matrix,'m')
-      console.log('inicia mapeo')
-       for(var p=p1;p<=p2;p++){
-        //console.log('expande')
-        var Nodos=expande(Registro[p]);
-        console.log(Nodos.length)
+    //  console.reset();
+      //console.log('get m')
+      var position=Helper.get_M(Matrix,'m')
+      //console.log('inicia mapeo')
+       for(var p=p1;p<p2;p++){
+        //console.log('p:'+p+" p1:"+p1+' p2:'+p2)
+        console.log('expande:'+Registro[p])
+        var Nodos=Helper.expande(Registro[p]);
+        console.log("Nodos:"+Nodos.length)
         var parent=Registro[p].ID;
          for (var n in Nodos){
-             console.log(Nodos[n]);
-           if(CompareM(get_M(n.M),solution))
+           _n=Nodos[n];
+          console.log("Node:"+Nodos[n]);
+           if(Helper.CompareM(Helper.get_M(_n.M,'m'),solution))
            isSolution=true;
            n.ID=count;
            n.Parent=parent;
-           Registro.push(n);
-           console.log(count);
-           console.log('expandiendo: '+p+'/'+(p2-p1))
-           printMatrix()
-            console.reset();
+           count+=1;
+           //Registro.push(n);
+
+           //console.log(count);
+           //console.log('expandiendo: '+p+'/'+(p2-p1))
+           //printMatrix()
+
          }
+
        }
        p1=p2;
        p2=count;
+
+       console.log("p1:"+p1+' p2:'+p2)
     }
     console.log('Fin :)');
-}
-function expande(M){
-  var response=[];
-  Moves.forEach(function(_m){
-    if(isPossibleMoveIt(M.M,_m)&&!Exist(M.M)){
-       var _nodo=new Nodo(M.m,_m,M.ID);
-      response.push(_nodo);
-    }
-
-  });
-  return response;
-}
-function isPossibleMoveIt(M,move){
-  var p=get_M(Matrix,'m');
-  var response;
-  var d=Matrix.length;
-    switch(move){
-        case "D":
-        if(p.y<d)
-        response =true;
-            break;
-        case "U":
-        if(p.y>0)
-        response=true;
-            break
-        case "L":
-        if(p.x>0)
-        response=true
-        break;
-        case "R":
-        if(p.x<d)
-        response=true;
-        break;
-    }
-    return response;
-}
-function Exist(M){
-  var response=false;
-  var e=Registro.filter(function(x){return CompareM(x.M,M)}).length;
-  if(e>0)
-  response =true;
-}
-function get_M(M,t){
-    console.log(M);
-  var w = M.length;
-  var p={};
-  for (var r=0;r<w;r++){
-    for (var c=0;c<w;c++){
-       if(M[r][c]==t)
-       return {x:c,y:r};
-    }
-  }
 }
 function gidToMatrix(d,grid){
     console.log("gridToMatrix")
@@ -131,12 +91,6 @@ function printMatrix(M){
        console.log(a);
      })
 
-}
-function CompareM(m1,m2){
-var  response =false;
-var m_1=JSON.stringify(m1);
-var m_2=JSON.stringify(m2);
-return m_1 == m_2;
 }
 console.log("bot save princess");
 grid=["-","-","-","-","m","-","p","-","-"];
