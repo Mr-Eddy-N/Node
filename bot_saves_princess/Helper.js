@@ -9,16 +9,16 @@ module.exports={
      Moves.forEach(function(_m){
        console.log(_m);
        if(module.exports.isPossibleMoveIt(M.M,_m)){
-         console.log('Registro_test'+Registro[0].M);
+         //console.log('Registro_test'+Registro[0].M);
        var tempM=JSON.parse(JSON.stringify(M.M));
        var p =module.exports.get_M(M.M,'m');
-        console.log('Registro_test'+Registro[0].M);
+        //console.log('Registro_test'+Registro[0].M);
       if(_m=="D"){
         var t = tempM[p.r+1][p.c];
         tempM[p.r][p.c]=t;
         tempM[p.r+1][p.c]='m';
       }
-       console.log('Registro_test'+Registro[0].M);
+       //console.log('Registro_test'+Registro[0].M);
       if(_m=="U"){
         var t = tempM[p.r-1][p.c];
         tempM[p.r][p.c]=t;
@@ -32,7 +32,7 @@ module.exports={
       if(_m=="R"){
         var t = tempM[p.r][p.c+1];
         tempM[p.r][p.c]=t;
-        tempM[p.r+1][p.c+1]='m';
+        tempM[p.r][p.c+1]='m';
       }
        var _nodo=new Nodo(tempM,_m,M.ID);
       // console.log('Registro_test'+Registro[0].M);
@@ -47,7 +47,7 @@ isPossibleMoveIt:function (M,move){
   var p=module.exports.get_M(M,'m');
   //console.log('p'+p)
   var response;
-  var d=Matrix.length;
+  var d=Matrix.length-1;
     switch(move){
         case "D":
         if(p.r<d)
