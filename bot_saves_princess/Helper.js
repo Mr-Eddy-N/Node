@@ -3,11 +3,11 @@ module.exports={
     console.log('1.0.0')
   },
   expande:function (M){
-    console.log("Expande:"+M.M)
-    console.log('Registro_test'+Registro[0].M);
+    //console.log("Expande:"+M.M)
+    //console.log('Registro_test'+Registro[0].M);
      var response=[];
      Moves.forEach(function(_m){
-       console.log(_m);
+       //console.log(_m);
        if(module.exports.isPossibleMoveIt(M.M,_m)){
          //console.log('Registro_test'+Registro[0].M);
        var tempM=JSON.parse(JSON.stringify(M.M));
@@ -43,7 +43,7 @@ module.exports={
   return response;
 },
 isPossibleMoveIt:function (M,move){
-  console.log('isPossibleMoveIt:'+M+' move:'+move);
+ // console.log('isPossibleMoveIt:'+M+' move:'+move);
   var p=module.exports.get_M(M,'m');
   //console.log('p'+p)
   var response;
@@ -66,22 +66,22 @@ isPossibleMoveIt:function (M,move){
         response=true;
         break;
     }
-    console.log('response:'+response);
+    //console.log('response:'+response);
     return response;
 },
  Exist:function(M){
-   console.log('Exist:'+M);
+   //console.log('Exist:'+M);
     var response=false;
-    console.log('registro:'+Registro[0].M);
+   // console.log('registro:'+Registro[0].M);
     var e=Registro.filter(function(x){return module.exports.CompareM(x.M,M)}).length;
     if(e>0)
     response =true;
-    console.log('response:'+response)
+    //console.log('response:'+response)
     return response;
   },
 
   get_M:function(M,t){
-   console.log('get_M:'+M);
+   //console.log('get_M:'+M);
     var w = M.length;
     var p={};
     var response;
@@ -91,12 +91,12 @@ isPossibleMoveIt:function (M,move){
          response= {c:c,r:r};
       }
     }
-    console.log('response:'+JSON.stringify(response));
+   // console.log('response:'+JSON.stringify(response));
     return response;
   },
 CompareM:function (m1,m2){
   var  response =false;
-  console.log('compare:'+m1+' con '+m2);
+ // console.log('compare:'+m1+' con '+m2);
   var m_1=JSON.stringify(m1);
   var m_2=JSON.stringify(m2);
   return m_1 == m_2;

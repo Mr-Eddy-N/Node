@@ -29,42 +29,43 @@ function displayPathtoPrincess(dimension, grid)
     //console.log(get_M(Matrix,'p'))
     //console.log("Matrix: "+Matrix.length)Matrix.forEach(function(a){console.log(a)})
     while(!isSolution){
-    //  console.reset();
+    console.reset();
       //console.log('get m')
       //var position=Helper.get_M(Matrix,'m')
       //console.log('inicia mapeo')
        for(var p=p1;p<p2;p++){
-        console.log('p:'+p+" p1:"+p1+' p2:'+p2+" Registro: "+Registro[p])
+        //console.log('p:'+p+" p1:"+p1+' p2:'+p2+" Registro: "+Registro[p])
         
-        console.log('expande:'+Registro[p])
+        //console.log('expande:'+Registro[p])
         var Nodos=Helper.expande(Registro[p]);
-        console.log("Nodos:"+Nodos.length)
+        //console.log("Nodos:"+Nodos.length)
         var parent=Registro[p].ID;
          for (var n in Nodos){
+             console.reset();
            _n=Nodos[n];
-          console.log("Node:"+Nodos[n].M);  
-          console.log("Solution:"+JSON.stringify(solution));
+          //console.log("Node:"+Nodos[n].M);  
+          //console.log("Solution:"+JSON.stringify(solution));
           _newSol=JSON.stringify(Helper.get_M(_n.M,'m'))
            if(_newSol==JSON.stringify(solution))
            isSolution=true;
            _n.ID=count;
            _n.Parent=parent;
            count+=1;
-             console.log("Push:"+_n.M)
+             //console.log("Push:"+_n.M)
            Registro.push(_n);
 
-           //console.log(count);
-           //console.log('expandiendo: '+p+'/'+(p2-p1))
-           //printMatrix()
+           console.log(count);
+           console.log('expandiendo: '+p+'/'+(p2-p1))
+           printMatrix(_n.M)
          }
        }
        p1=p2;
        p2=count;
-       console.log("p1:"+p1+' p2:'+p2)
+       //console.log("p1:"+p1+' p2:'+p2)
        
     }
     console.log('Fin :)');
-    console.log(Registro[Registro.length-1].Parent);
+   // console.log(Registro[Registro.length-1].Parent);
    Registro[Registro.length-1].M= saveP(Registro[Registro.length-1].M)
     Soluciones=[];
     ct = Registro.length-1;
