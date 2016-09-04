@@ -13,23 +13,23 @@ module.exports={
        var tempM=JSON.parse(JSON.stringify(M.M));
        var p =module.exports.get_M(M.M,'m');
         //console.log('Registro_test'+Registro[0].M);
-      if(_m=="D"){
+      if(_m=="DOWN"){
         var t = tempM[p.r+1][p.c];
         tempM[p.r][p.c]=t;
         tempM[p.r+1][p.c]='m';
       }
        //console.log('Registro_test'+Registro[0].M);
-      if(_m=="U"){
+      if(_m=="UP"){
         var t = tempM[p.r-1][p.c];
         tempM[p.r][p.c]=t;
         tempM[p.r-1][p.c]='m';
       }
-      if(_m=="L"){
+      if(_m=="LEFT"){
         var t = tempM[p.r][p.c-1];
         tempM[p.r][p.c]=t;
         tempM[p.r][p.c-1]='m';
       }
-      if(_m=="R"){
+      if(_m=="RIGHT"){
         var t = tempM[p.r][p.c+1];
         tempM[p.r][p.c]=t;
         tempM[p.r][p.c+1]='m';
@@ -49,19 +49,19 @@ isPossibleMoveIt:function (M,move){
   var response;
   var d=Matrix.length-1;
     switch(move){
-        case "D":
+        case "DOWN":
         if(p.r<d)
         response =true;
             break;
-        case "U":
+        case "UP":
         if(p.r>0)
         response=true;
             break
-        case "L":
+        case "LEFT":
         if(p.c>0)
         response=true
         break;
-        case "R":
+        case "RIGHT":
         if(p.c<d)
         response=true;
         break;
