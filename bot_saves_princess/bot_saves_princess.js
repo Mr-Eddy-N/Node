@@ -29,25 +29,29 @@ function displayPathtoPrincess(dimension, grid)
     //console.log(get_M(Matrix,'p'))
     //console.log("Matrix: "+Matrix.length)Matrix.forEach(function(a){console.log(a)})
     while(!isSolution){
-    console.reset();
-      //console.log('get m')
-      //var position=Helper.get_M(Matrix,'m')
-      //console.log('inicia mapeo')
+    //console.reset();
+     // console.log('get m')
+      var position=Helper.get_M(Matrix,'m')
+     // console.log('inicia mapeo')
        for(var p=p1;p<p2;p++){
-        //console.log('p:'+p+" p1:"+p1+' p2:'+p2+" Registro: "+Registro[p])
+       // console.log('p:'+p+" p1:"+p1+' p2:'+p2+" Registro: "+Registro[p])
 
-      //  console.log('expande:'+Registro[p])
+        //console.log('expande:'+Registro[p])
         var Nodos=Helper.expande(Registro[p]);
-      //  console.log("Nodos:"+Nodos.length)
+       // console.log("Nodos:"+Nodos.length)
         var parent=Registro[p].ID;
-         for (var n in Nodos){
-            console.reset();
-           _n=Nodos[n];
+         for /*(var n in Nodos)*/(var i =0;i<Nodos.length;i++){
+            //console.reset();
+           _n=Nodos[i];
           //console.log("Node:"+Nodos[n].M);
           //console.log("Solution:"+JSON.stringify(solution));
           _newSol=JSON.stringify(Helper.get_M(_n.M,'m'))
-           if(_newSol==JSON.stringify(solution))
-           isSolution=true;
+           if(_newSol==JSON.stringify(solution))             
+           {isSolution=true;
+           console.log("solucion");
+             i=Nodos.length;
+            p=count;
+           }
            _n.ID=count;
            _n.Parent=parent;
            count+=1;
@@ -70,11 +74,11 @@ function displayPathtoPrincess(dimension, grid)
     Soluciones=[];
     ct = Registro.length-1;
     _finish =false;
-    while(!_finish){
+   while(!_finish){
          _res=Registro[ct];
           //console.log("value "+ct);
           //console.log("ID: "+_res.ID+" Padre:"+_res.Parent+" Movimiento:"+_res.Move)
-        //  printMatrix(_res.M);
+            printMatrix(_res.M);
             Soluciones.push({move:_res.Move,M:_res.M});
           ct=Registro[ct].Parent;
         if(!ct){
@@ -119,7 +123,7 @@ Nodo=function(M,m,p){
     this.M=M;
 }
 function printMatrix(M){
-  console.log('print')
+  console.log('')
      M.forEach(function(a){
       /* a.forEach(function(i){
          console.log()
@@ -129,12 +133,14 @@ function printMatrix(M){
 
 }
 console.log("bot save princess");
-//grid=["-","-","-","-","m","-","p","-","-"];
-grid=["-","-","-","-","-","-","-","-","-","m",
+/*grid=["m","-","-",
+      "-","-","-",
+      "p","-","-"];*/
+grid=["-","-","-","-","-","-","-","-","-","-",
       "-","-","-","-","-","-","-","-","-","-",
       "-","-","-","-","-","-","-","-","-","-",
       "-","-","-","-","-","-","-","-","-","-",
-      "-","-","-","-","-","-","-","-","-","-",
+      "-","-","-","-","-","m","-","-","-","-",
       "-","-","-","-","-","-","-","-","-","-",
       "-","-","-","-","-","-","-","-","-","-",
       "-","-","-","-","-","-","-","-","-","-",

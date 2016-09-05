@@ -46,7 +46,7 @@ isPossibleMoveIt:function (M,move){
  // console.log('isPossibleMoveIt:'+M+' move:'+move);
   var p=module.exports.get_M(M,'m');
   //console.log('p'+p)
-  var response;
+  var response=false;
   var d=Matrix.length-1;
     switch(move){
         case "DOWN":
